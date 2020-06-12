@@ -6,6 +6,7 @@
 import sys
 import os
 import math
+#from sympy.stats import Normal
 from sympy.statistics import Normal
 from sympy import oo
 

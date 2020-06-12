@@ -116,7 +116,7 @@ def fill_comparisons(all_systems, sent_sys_rank):
 def get_mu_sigma(sys_rate):
     sys_mu_sigma = {}
     for k, v in sys_rate.items():
-        sys_mu_sigma[k] = [v.mu, v.sigma*v.sigma]
+        sys_mu_sigma[k] = [v.mu, v.sigma*v.sigma]	   
     return sys_mu_sigma
 
 
@@ -180,9 +180,9 @@ def estimate_by_number():
             partial_rank = obs[1]
 
             if args.freeN == 2:
-                if (num_play >= (num_iter * count_begin)) and (num_play <= (num_iter * count_end)):
-                    sys_a = obs[0][0]
-                    sys_b = obs[0][1]
+                if (num_play >= (num_iter * count_begin)) and (num_play <= (num_iter * count_end)):                  
+		    sys_a = obs[0][0]
+                    sys_b = obs[0][1]	            
                     counter_dict[sys_a + '_' + sys_b] += 1
                     counter_dict[sys_b + '_' + sys_a] += 1
 
@@ -195,10 +195,19 @@ def estimate_by_number():
            
             if num_play == num_iter:
                 f = open(args.prefix + '_mu_sigma.json', 'w')
+		f2 = open(args.prefix + '_sort_mu_sigma.json', 'w')
+		
                 t = get_mu_sigma(system_rating)
-                t['data_points'] = [data_points, args.dp_pct]
-                json.dump(t, f)
+                t['data_points'] = [data_points, args.dp_pct]		
+		sys_mu = zip(*sort_by_mu(system_rating))[0]
+		sys_name = zip(*sort_by_mu(system_rating))[1]
+		outf = {}
+		outf['sysname'] = sys_name
+                outf['mu'] = sys_mu
+		json.dump(t, f)   		
+                json.dump(outf, f2)
                 f.close()
+		f2.close()
 
                 if (args.freeN == 2) and (num_iter_org == num_record[-1]) and args.heat:
                     f = open(args.prefix + '-' + str(count_begin)+'-'+str(count_end)+'_count.json', 'w')
@@ -206,7 +215,7 @@ def estimate_by_number():
                     counts = get_counts(sys_names, counter_dict, num_play)
                     outf = {}
                     outf['sysname'] = sys_names
-                    outf['counts'] = counts
+                    outf['counts'] = counts		  		
                     json.dump(outf, f)
                     f.close()
 
