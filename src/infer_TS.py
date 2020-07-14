@@ -150,7 +150,7 @@ def estimate_by_number():
 			num_rankings = 0
 			for key in comparison_d.keys():
 				num_rankings += len(comparison_d[key])
-		    	data_points = num_rankings / len(list(combinations(inilist, 2))) + 1
+			data_points = num_rankings / len(list(combinations(inilist, 2))) + 1
 		else:
 			data_points = num_iter_org  # by # of matches
 		num_iter = int(args.dp_pct * data_points)
