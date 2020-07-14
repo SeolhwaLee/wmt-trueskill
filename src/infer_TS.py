@@ -191,7 +191,7 @@ def estimate_by_number():
 			for s, r in zip(systems_name_compared, updated_ratings):
 				system_rating[s] = r[0]
 
-		    	if num_play == num_iter:
+			if num_play == num_iter:
 				f = open(args.prefix + '_mu_sigma.json', 'w')
 				f2 = open(args.prefix + '_sort_mu_sigma.json', 'w')
 
