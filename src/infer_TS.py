@@ -165,58 +165,58 @@ def estimate_by_number():
 		for s in all_systems:
 		    system_rating[s] = Rating()
 		while num_play < num_iter:
-		    num_play += 1
-		    systems_compared = scripts.next_comparison.get(get_mu_sigma(system_rating), args.freeN)
-		    systems_compared =  "_".join(tuple(sorted(systems_compared)))
-		    # print("TEST:", comparison_d[systems_compared])
-		    if not comparison_d[systems_compared]:
-			# print("TT")
-			pass
-		    else:
-			obs = random.choice(comparison_d[systems_compared])    #(systems, rank)
-		    # print("ods:",obs)
-		    systems_name_compared = obs[0]
-		    partial_rank = obs[1]
+			num_play += 1
+			systems_compared = scripts.next_comparison.get(get_mu_sigma(system_rating), args.freeN)
+			systems_compared =  "_".join(tuple(sorted(systems_compared)))
+			# print("TEST:", comparison_d[systems_compared])
+			if not comparison_d[systems_compared]:
+				# print("TT")
+				pass
+			else:
+				obs = random.choice(comparison_d[systems_compared])    #(systems, rank)
+				# print("ods:",obs)
+				systems_name_compared = obs[0]
+				partial_rank = obs[1]
 
-		    if args.freeN == 2:
-			if (num_play >= (num_iter * count_begin)) and (num_play <= (num_iter * count_end)):                  
-			    sys_a = obs[0][0]
-			    sys_b = obs[0][1]	            
-			    counter_dict[sys_a + '_' + sys_b] += 1
-			    counter_dict[sys_b + '_' + sys_a] += 1
+			if args.freeN == 2:
+				if (num_play >= (num_iter * count_begin)) and (num_play <= (num_iter * count_end)):
+					sys_a = obs[0][0]
+					sys_b = obs[0][1]	            
+					counter_dict[sys_a + '_' + sys_b] += 1
+					counter_dict[sys_b + '_' + sys_a] += 1
 
-		    ratings = []
-		    for s in systems_name_compared:
-			ratings.append([system_rating[s]])
-		    updated_ratings = rate(ratings, ranks=partial_rank)
-		    for s, r in zip(systems_name_compared, updated_ratings):
-			system_rating[s] = r[0]
+			ratings = []
+			for s in systems_name_compared:
+				ratings.append([system_rating[s]])
+			updated_ratings = rate(ratings, ranks=partial_rank)
+			for s, r in zip(systems_name_compared, updated_ratings):
+				system_rating[s] = r[0]
 
-		    if num_play == num_iter:
-			f = open(args.prefix + '_mu_sigma.json', 'w')
-			f2 = open(args.prefix + '_sort_mu_sigma.json', 'w')
+		    	if num_play == num_iter:
+				f = open(args.prefix + '_mu_sigma.json', 'w')
+				f2 = open(args.prefix + '_sort_mu_sigma.json', 'w')
 
-			t = get_mu_sigma(system_rating)
-			t['data_points'] = [data_points, args.dp_pct]		
-			sys_mu = zip(*sort_by_mu(system_rating))[0]
-			sys_name = zip(*sort_by_mu(system_rating))[1]
-			outf = {}
-			outf['sysname'] = sys_name
-			outf['mu'] = sys_mu
-			json.dump(t, f)   		
-			json.dump(outf, f2)
-			f.close()
-			f2.close()
+				t = get_mu_sigma(system_rating)
+				t['data_points'] = [data_points, args.dp_pct]		
+				sys_mu = zip(*sort_by_mu(system_rating))[0]
+				sys_name = zip(*sort_by_mu(system_rating))[1]
+				outf = {}
+				outf['sysname'] = sys_name
+				outf['mu'] = sys_mu
+				json.dump(t, f)   		
+				json.dump(outf, f2)
+				f.close()
+				f2.close()
 
 			if (args.freeN == 2) and (num_iter_org == num_record[-1]) and args.heat:
-			    f = open(args.prefix + '-' + str(count_begin)+'-'+str(count_end)+'_count.json', 'w')
-			    sys_names = zip(*sort_by_mu(system_rating))[1]
-			    counts = get_counts(sys_names, counter_dict, num_play)
-			    outf = {}
-			    outf['sysname'] = sys_names
-			    outf['counts'] = counts		  		
-			    json.dump(outf, f)
-			    f.close()
+				f = open(args.prefix + '-' + str(count_begin)+'-'+str(count_end)+'_count.json', 'w')
+				sys_names = zip(*sort_by_mu(system_rating))[1]
+				counts = get_counts(sys_names, counter_dict, num_play)
+				outf = {}
+				outf['sysname'] = sys_names
+				outf['counts'] = counts		  		
+				json.dump(outf, f)
+				f.close()
 
 if __name__ == '__main__':
     all_systems, sent_sys_rank = parse_csv()
