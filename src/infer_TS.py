@@ -223,4 +223,3 @@ if __name__ == '__main__':
     all_systems, sent_sys_rank = parse_csv()
     fill_comparisons(all_systems, sent_sys_rank)
     estimate_by_number()
-
