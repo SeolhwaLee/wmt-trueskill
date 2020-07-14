@@ -170,7 +170,7 @@ def estimate_by_number():
             systems_compared = scripts.next_comparison.get(get_mu_sigma(system_rating), args.freeN)
             systems_compared =  "_".join(tuple(sorted(systems_compared)))
 	    # print("TEST:", comparison_d[systems_compared])
-            if not comparison_d[systems_compared] :
+            if not comparison_d[systems_compared]:
 		# print("TT")
 		pass
 	    else:
