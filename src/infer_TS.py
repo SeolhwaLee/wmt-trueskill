@@ -65,33 +65,33 @@ sigma_systems = [[], []]
 def parse_csv():
 	### Parsing csv file and return system names and rank(1-5) for each sentence
 	all_systems = []
-    	sent_sys_rank = defaultdict(list)
-    	for i,row in enumerate(DictReader(sys.stdin)):
+	sent_sys_rank = defaultdict(list)
+	for i,row in enumerate(DictReader(sys.stdin)):
 		sentID = int(row.get('srcIndex'))
 		systems = []
 		ranks = []
 		for num in range(1, args.num_systems+1):
-		    if row.get('system%dId' % num) in all_systems:
-			pass
-		    else:
-			all_systems.append(row.get('system%dId' % num))
-		    systems.append(row.get('system%dId' % num))
-		    ranks.append(int(row.get('system%drank' % num)))
+			if row.get('system%dId' % num) in all_systems:
+				pass
+		    	else:
+				all_systems.append(row.get('system%dId' % num))
+			systems.append(row.get('system%dId' % num))
+			ranks.append(int(row.get('system%drank' % num)))
 		if -1 in ranks:
-		    pass
+		    	pass
 		else:
-		    sent_sys_rank[sentID].append({'systems': systems, 'ranks': ranks})
-	    return all_systems, sent_sys_rank
+		    	sent_sys_rank[sentID].append({'systems': systems, 'ranks': ranks})
+	return all_systems, sent_sys_rank
 
 def get_pairranks(rankList):
 	result = []
 	for pair in combinations(rankList, 2):
 		if pair[0] == pair[1]:
-		    result.append(1)
+			result.append(1)
 		elif pair[0] > pair[1]:
-		    result.append(2)
+			result.append(2)
 		else:
-		    result.append(0)
+			result.append(0)
 	return result
 
 def get_pairwise(names, ranks):
