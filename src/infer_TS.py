@@ -143,7 +143,7 @@ def estimate_by_number():
     #  [[r1], [r2], [r3], [r4], [r5]] = rate([[r1], [r2], [r3], [r4], [r5]], ranks=[1,2,3,3,5])
 	for num_iter_org in num_record:
 		# setting for same number comparison (in terms of # of systems)
-        	inilist = [0] * args.freeN
+		inilist = [0] * args.freeN
 		data_points = 0
 		if num_iter_org == 0:
 		    ### by # of pairwise judgements
