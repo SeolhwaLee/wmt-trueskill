@@ -144,16 +144,15 @@ def estimate_by_number():
 	for num_iter_org in num_record:
 		# setting for same number comparison (in terms of # of systems)
         	inilist = [0] * args.freeN
-	
 		data_points = 0
 		if num_iter_org == 0:
 		    ### by # of pairwise judgements
-		    num_rankings = 0
-		    for key in comparison_d.keys():
-			num_rankings += len(comparison_d[key])
-		    data_points = num_rankings / len(list(combinations(inilist, 2))) + 1
+			num_rankings = 0
+			for key in comparison_d.keys():
+				num_rankings += len(comparison_d[key])
+		    	data_points = num_rankings / len(list(combinations(inilist, 2))) + 1
 		else:
-		    data_points = num_iter_org  # by # of matches
+			data_points = num_iter_org  # by # of matches
 		num_iter = int(args.dp_pct * data_points)
 		print >> sys.stderr, "Sampling %d / %d pairwise judgments" % (num_iter, data_points)
 		param_beta = param_sigma * (num_iter/40.0)
@@ -163,7 +162,7 @@ def estimate_by_number():
 		num_play = 0
 		counter_dict = defaultdict(int)
 		for s in all_systems:
-		    system_rating[s] = Rating()
+			system_rating[s] = Rating()
 		while num_play < num_iter:
 			num_play += 1
 			systems_compared = scripts.next_comparison.get(get_mu_sigma(system_rating), args.freeN)
