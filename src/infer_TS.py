@@ -73,14 +73,14 @@ def parse_csv():
 		for num in range(1, args.num_systems+1):
 			if row.get('system%dId' % num) in all_systems:
 				pass
-		    	else:
+			else:
 				all_systems.append(row.get('system%dId' % num))
 			systems.append(row.get('system%dId' % num))
 			ranks.append(int(row.get('system%drank' % num)))
 		if -1 in ranks:
-		    	pass
+			pass
 		else:
-		    	sent_sys_rank[sentID].append({'systems': systems, 'ranks': ranks})
+			sent_sys_rank[sentID].append({'systems': systems, 'ranks': ranks})
 	return all_systems, sent_sys_rank
 
 def get_pairranks(rankList):
