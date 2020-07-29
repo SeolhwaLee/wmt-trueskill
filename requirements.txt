@@ -1,4 +1,5 @@
 numpy
-trueskill
 matplotlib
-sympy
+sympy==0.7.6.1
+trueskill==0.4.5
+
