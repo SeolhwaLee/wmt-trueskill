@@ -32,7 +32,7 @@ def get(sys_musigma, n):
             sys_chance[0].append(k)
             sys_chance[1].append(1./math.exp(abs(sys_musigma[sys_a][0] - sys_musigma[k][0])))
     while len(systems_compared) != n:
-        sys_b = random_sample.choose(sys_chance[0], sys_chance[1])
+        sys_b = scripts.random_sample.choose(sys_chance[0], sys_chance[1])
         systems_compared.append(sys_b)
         systems_compared = list(set(systems_compared))
     return tuple(set(systems_compared))
