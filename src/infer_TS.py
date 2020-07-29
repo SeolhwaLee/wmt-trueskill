@@ -154,7 +154,7 @@ def estimate_by_number():
 		else:
 			data_points = num_iter_org  # by # of matches
 		num_iter = int(args.dp_pct * data_points)
-		print >> sys.stderr, "Sampling %d / %d pairwise judgments" % (num_iter, data_points)
+		print(sys.stderr, "Sampling %d / %d pairwise judgments" % (num_iter, data_points))
 		param_beta = param_sigma * (num_iter/40.0)
 		env = TrueSkill(mu=0.0, sigma=param_sigma, beta=param_beta, tau=param_tau, draw_probability=draw_rate)
 		env.make_as_global()
