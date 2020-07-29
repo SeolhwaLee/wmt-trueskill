@@ -197,8 +197,8 @@ def estimate_by_number():
 
 				t = get_mu_sigma(system_rating)
 				t['data_points'] = [data_points, args.dp_pct]		
-				sys_mu = zip(*sort_by_mu(system_rating))[0]
-				sys_name = zip(*sort_by_mu(system_rating))[1]
+				sys_mu = list(zip(*sort_by_mu(system_rating)))[0]
+				sys_name = list(zip(*sort_by_mu(system_rating)))[1]
 				outf = {}
 				outf['sysname'] = sys_name
 				outf['mu'] = sys_mu
