@@ -11,7 +11,7 @@ __usage__ = ""
 import sys
 import os
 import math
-import random_sample
+import scripts.random_sample
 import json
 
 def sort_by_sigma(sys_musigma):
